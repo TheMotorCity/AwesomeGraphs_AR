@@ -8,7 +8,7 @@ public class GraphBuild : MonoBehaviour
     private int[,] cases = {{1,7,8,9,11,11,11,12,13,13,13,13,15,15,15,15,15,15,15,15,15,15,15,15,15,15,17,21,47,57},{111,129,157,196,262,400,684,847,902,1139,1296,1567,2369,3062,3795,4838,6012,7156,8198,14138,18187,21463,24774,29212,31554,36508,42288,48582,52547,57298}};
     public GameObject DataPoint;
     float timer = 1;
-    int idHighlightDataPoint = 0;
+    int idHighlightDataPoint = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,14 +41,13 @@ public class GraphBuild : MonoBehaviour
         timer = timer + Time.deltaTime;
         GameObject caseCountText = gameObject.transform.GetChild(0).gameObject;
         
-        if(timer > 1)
+        if(timer > 0.1)
         {
             timer = 0;
             
-            caseCountText.GetComponent<TextMesh>().text = cases.Cast<int>().ToArray()[idHighlightDataPoint].ToString();
+           
             if(idHighlightDataPoint < gameObject.transform.childCount)
             {
-                           
                 GameObject currentChild = gameObject.transform.GetChild(idHighlightDataPoint).gameObject;
                 currentChild.GetComponent<Renderer>().material.color = Color.green;
                 if(idHighlightDataPoint > 1)
@@ -57,12 +56,14 @@ public class GraphBuild : MonoBehaviour
                     lastChild.GetComponent<Renderer>().material.color = Color.red;
                 }
                 idHighlightDataPoint++;
-
             }
             else
             {
-                idHighlightDataPoint = 0;
+                GameObject currentChild = gameObject.transform.GetChild(idHighlightDataPoint-1).gameObject;
+                currentChild.GetComponent<Renderer>().material.color = Color.red;
+                idHighlightDataPoint = 1;
             }
+            caseCountText.GetComponent<TextMesh>().text = cases.Cast<int>().ToArray()[idHighlightDataPoint-1].ToString();
         }
 
     }
