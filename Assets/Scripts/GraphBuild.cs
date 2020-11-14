@@ -38,7 +38,7 @@ public class GraphBuild : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer = timer + Time.deltaTime;
+        /*timer = timer + Time.deltaTime;
         GameObject caseCountText = gameObject.transform.GetChild(0).gameObject;
         
         if(timer > 0.1)
@@ -64,7 +64,6 @@ public class GraphBuild : MonoBehaviour
                 idHighlightDataPoint = 1;
             }
             caseCountText.GetComponent<TextMesh>().text = cases.Cast<int>().ToArray()[idHighlightDataPoint-1].ToString();
-        }
-
+        }*/
     }
 }
